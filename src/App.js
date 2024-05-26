@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'; 
+import Axios from 'axios'; 
+import { useState } from 'react'; 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+function App() { 
+	const [artist, setArtist] = useState(""); 
+	const [song, setSong] = useState(""); 
+	const [lyrics, setLyrics] = useState(""); 
+
+	function searchLyrics() { 
+		if (artist === "" || song === "") { 
+			alert("Artist dan Song tidak boleh kosong!"); 
+			return; 
+		} 
+		Axios.get( 
+`https://api.lyrics.ovh/v1/${artist}/${song}`).then(res => { 
+			console.log(res.data.lyrics); 
+			setLyrics(res.data.lyrics); 
+		}) 
+	} 
+
+	return ( 
+		<div className="App"> 
+			<h1 onClick={() => {window.location.reload();}}>Lyrics Finder</h1> 
+
+			<input className="inp" type="text"
+				placeholder='Artist name'
+				onChange={(e) => { setArtist(e.target.value) }} /> 
+			<input className="inp" type="text"
+				placeholder='Song name'
+				onChange={(e) => { setSong(e.target.value) }} /> 
+			<button className="btn"
+				onClick={() => searchLyrics()}> 
+					Search</button> 
+			<hr /> 
+			<pre>{lyrics}</pre> 
+		</div> 
+	); 
+} 
 
 export default App;
