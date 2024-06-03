@@ -101,7 +101,7 @@ hr {
     width: 80%;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 290px) {
   pre {
     font-size: 4vw; /* Increase font size on mobile screens */
     padding: 4vw; /* Increase padding on mobile screens */
