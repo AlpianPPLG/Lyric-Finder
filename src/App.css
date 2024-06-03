@@ -48,13 +48,18 @@ hr {
     border-radius: 1px;
 }
 
-@media (max-width: 767px) {
-  .inp {
-    width: 90%;
-    max-width: none;
-  }
+.inp {
+    width: 70%;
+    max-width: 300px; /* Set a max-width for larger screens */
+    height: 45px;
+    border: 2px solid #113a5d;
+    margin: 0px 10px 20px 10px;
+    padding-left: 10px;
+    font-size: 18px; /* Adjusted font-size for better readability */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-
 @media (max-width: 1200px) {
     pre {
         font-size: 2vw; /* Increase font size on laptop screens */
