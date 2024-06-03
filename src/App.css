@@ -17,6 +17,7 @@ h1 {
   font-family: "Fredoka One", cursive;
   color: black;
   margin-bottom: 20px;
+  word-wrap: break-word; /* Add this line to wrap long text to the next line */
 }
 
 pre {
@@ -30,6 +31,7 @@ pre {
   margin: 20px auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid #dceefc;
+  word-wrap: break-word; /* Add this line to wrap long text to the next line */
 }
 
 pre:hover {
@@ -109,7 +111,7 @@ hr {
 
   .inp {
     width: 100%;
-    font-size: 15px; /* Adjust font-size for mobiles */
+    font-size: 16px; /* Adjust font-size for mobiles */
     max-width: 100%; /* Make .inp responsive at mobile */
   }
 
