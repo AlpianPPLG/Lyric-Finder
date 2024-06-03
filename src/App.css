@@ -39,13 +39,17 @@ pre:hover {
 }
 
 hr {
-    margin-top: 30px;
-    width: 60%;
-    max-width: 700px; /* Set a max-width for larger screens */
-    border: 0;
-    height: 2px;
-    background: linear-gradient(90deg, rgba(17, 58, 93, 0.8), rgba(17, 58, 93, 0.2));
-    border-radius: 1px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: none;
+  border: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(17, 58, 93, 0.8),
+    rgba(17, 58, 93, 0.2)
+  );
+  border-radius: 1px;
 }
 
 .inp {
