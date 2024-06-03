@@ -55,7 +55,7 @@ function App() {
         type="text"
         placeholder="Artist name"
         onChange={(e) => {
-          setArtist(e.target.value);
+          setArtist(e.target.value + "\n");        
         }}
       />
       <input
