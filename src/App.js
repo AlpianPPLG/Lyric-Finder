@@ -7,14 +7,17 @@ function App() {
   const [song, setSong] = useState("");
   const [lyrics, setLyrics] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function searchLyrics() {
     if (artist === "" || song === "") {
       alert("Artist dan Song tidak boleh kosong!");
       return;
     }
+    setIsLoading(true);
     Axios.get(`https://api.lyrics.ovh/v1/${artist}/${song}`)
       .then((res) => {
+        setIsLoading(false);
         if (
           res.data.lyrics === null ||
           res.data.lyrics === undefined ||
@@ -28,6 +31,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err.response?.status === 404) {
           alert("Lagu Dan Penyanyi Tidak Ditemukan!");
         } else {
@@ -55,7 +59,7 @@ function App() {
         type="text"
         placeholder="Artist name"
         onChange={(e) => {
-          setArtist(e.target.value + "\n");        
+          setArtist(e.target.value.replace(/(.{30})/g, "$1\n"));
         }}
       />
       <input
@@ -66,8 +70,12 @@ function App() {
           setSong(e.target.value);
         }}
       />
-      <button className="btn" onClick={() => searchLyrics()}>
-        Search
+      <button
+        className="btn"
+        onClick={() => searchLyrics()}
+        disabled={isLoading}
+      >
+        {isLoading ? "Loading..." : "Search"}
       </button>
       <br />
       <button className="button" onClick={toggleDarkMode}>
