@@ -98,7 +98,9 @@ function App() {
         {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
       <hr />
-      <pre>{lyrics}</pre>
+      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+        {lyrics}
+      </pre>
       <br />
       <div className="footer">
         © 2024 Copyright:
