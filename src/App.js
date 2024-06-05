@@ -1,6 +1,6 @@
 import "./App.css";
 import Axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [artist, setArtist] = useState("");
@@ -8,6 +8,17 @@ function App() {
   const [lyrics, setLyrics] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setText((prevText) => "Lyrics Finder".slice(0, index + 1));
+      setIndex((prevIndex) => (prevIndex + 1) % ("Lyrics Finder".length + 1));
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [index]);
 
   function searchLyrics() {
     if (artist === "" || song === "") {
@@ -15,6 +26,9 @@ function App() {
       return;
     }
     setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
     Axios.get(`https://api.lyrics.ovh/v1/${artist}/${song}`)
       .then((res) => {
         setIsLoading(false);
@@ -40,19 +54,19 @@ function App() {
       });
   }
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      searchLyrics();
+    }
+  };
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
   return (
     <div className={`App ${darkMode ? "dark-mode" : ""}`}>
-      <h1
-        onClick={() => {
-          window.location.reload();
-        }}
-      >
-        Lyrics Finder
-      </h1>
+      <h1 onClick={() => window.location.reload()}>{text}</h1>
 
       <input
         className="inp"
@@ -61,6 +75,7 @@ function App() {
         onChange={(e) => {
           setArtist(e.target.value.replace(/(.{30})/g, "$1\n"));
         }}
+        onKeyPress={handleKeyPress}
       />
       <input
         className="inp"
@@ -69,6 +84,7 @@ function App() {
         onChange={(e) => {
           setSong(e.target.value);
         }}
+        onKeyPress={handleKeyPress}
       />
       <button
         className="btn"
